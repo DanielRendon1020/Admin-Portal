@@ -1,9 +1,8 @@
 async function main(){
-    let respose = await fetch('http://localhost:3001/listBooks')
+    let response = await fetch('http://localhost:3001/listBooks')
     let books = await response.json()
 
-    console.log(books)
-
+    
     books.forEach(function(book){
 
         let bookContainer = document.querySelector('#root')
@@ -13,15 +12,15 @@ async function main(){
 
         let qtyInput = document.createElement('input')
         qtyInput.value = book.quantity
-        
+            
         let updateBtn = document.createElement('button')
         updateBtn.textContent = 'Save'
-        
+            
         updateBtn.addEventListener('click', () => {
             fetch('http://localhost:3001/updateBook', {
                 method: 'PATCH',
                 headers: {
-                    'Content-Type': 'application/jon'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     id: book.id,
@@ -32,9 +31,9 @@ async function main(){
 
         li.append(qtyInput, updateBtn)
         bookContainer.append(li)
+            
         
     })
 }
-
 main()
 // Your Code Here
